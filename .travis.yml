@@ -1,28 +1,28 @@
 language: cpp
 
-matrix:
-  include:
-    - os: linux
-      dist: bionic
-      sudo: true
-      compiler: gcc
-      addons:
-        apt:
-          packages:
-            - git
-            - gcc
-            - cmake
-            - build-essential
-  install:
-    - git clone https://github.com/raysan5/raylib
-    - cd raylib
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make -j 4
-    - make install
-    - cd ../..
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make -j 4
+os: linux
+dist: bionic
+sudo: true
+compiler: gcc
+addons:
+  apt:
+    packages:
+      - git
+      - gcc
+      - cmake
+      - build-essential
+    sources:
+      - ubuntu-toolchain-r-test
+install:
+  - git clone https://github.com/raysan5/raylib
+  - cd raylib
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make -j 4
+  - make install
+  - cd ../..
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make -j 4
