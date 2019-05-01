@@ -8,6 +8,7 @@
 
 #include <string>
 #include <cmath>
+#include <raylib.h>
 
 namespace raygauge {
     class Circle {
@@ -20,7 +21,7 @@ namespace raygauge {
         Circle(int minValue, int maxValue, int x, int y, int radius);
         Circle(int minValue, int maxValue, int x, int y, int radius, int segments);
         Circle(int minValue, int maxValue, int x, int y, int radius, int segments, int borderThickness);
-        ~Circle();
+        virtual ~Circle();
 
         void setValue(const std::string& value);
         void setX(int value);
@@ -35,6 +36,7 @@ namespace raygauge {
         void setMiddleCircleRadius(int value);
         void setUnits(const std::string& value);
         void setDegreesOfCircleUsage(int value);
+        void setColor(Color value);
 
         std::string getValue();
         int getMaxValue();
@@ -58,12 +60,14 @@ namespace raygauge {
         int textSize;
         int offset;
         int middleCircleRadius;
+
+        Color color;
     };
 
     class CircleWithExtraValue : public Circle {
     public:
         CircleWithExtraValue();
-        ~CircleWithExtraValue();
+        ~CircleWithExtraValue() override;
 
         void draw() override;
 

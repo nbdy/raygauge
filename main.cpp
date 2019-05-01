@@ -14,6 +14,7 @@ int main() {
     c->setSegments(13);
     c->setValue("200");
     c->setUnits("km/h");
+    c->setColor(RED);
     c->setExtraValue("420666");
     c->setDegreesOfCircleUsage(280);
 

@@ -3,13 +3,13 @@
 //
 
 #include "Circle.h"
-#include <raylib.h>
 #include <iostream>
 
 
 void raygauge::Circle::_setDefaultValues() {
     x = 0;
     y = 0;
+    color = GREEN;
     minValue = 0;
     maxValue = 420;
     radius = 64;
@@ -107,6 +107,8 @@ void raygauge::Circle::setUnits(const std::string &value) {units = value;}
 
 void raygauge::Circle::setDegreesOfCircleUsage(int value) {degreesOfCircleUsage = value;}
 
+void raygauge::Circle::setColor(Color value) {color = value;}
+
 std::string raygauge::Circle::getValue() {return value;}
 
 int raygauge::Circle::getMaxValue() {return maxValue;}
@@ -118,14 +120,14 @@ raygauge::Circle::~Circle() {}
 void raygauge::Circle::drawCircle() {
     int xc = x + radius;
     int yc = y + radius;
-    DrawCircle(xc, yc, radius - borderThickness / 2, GREEN);
+    DrawCircle(xc, yc, radius - borderThickness / 2, color);
     DrawCircle(xc, yc, radius - borderThickness - 16, BLACK); // todo indicator length setter
     for(int i = 0; i < segments; i++){
         int a = i * (degreesOfCircleUsage / segments);
         double d = ((a + offset) * PI / 180);
         double px = xc + radius * cos(d);
         double py = yc + radius * sin(d);
-        DrawLine(xc, yc, (int) px, (int) py, GREEN);
+        DrawLine(xc, yc, (int) px, (int) py, color);
     }
     DrawCircle(xc, yc, radius - borderThickness, BLACK);
     for(int i = 0; i < segments; i+=2){
@@ -133,7 +135,7 @@ void raygauge::Circle::drawCircle() {
         double d = ((a + offset) * PI / 180);
         double px = xc + radius * cos(d);
         double py = yc + radius * sin(d);
-        DrawLine(xc, yc, (int) px, (int) py, GREEN);
+        DrawLine(xc, yc, (int) px, (int) py, color);
         double npx = px - xc;
         double npy = py - yc;
         if(npx >= 0 && npy >= 0) px += 8;
@@ -143,15 +145,15 @@ void raygauge::Circle::drawCircle() {
         }
         if(npx <= 0 && npy >= 0) px -= 16;
         if(npx >= 0 && npy <= 0) py -= 16; // todo fix
-        DrawText(std::to_string((maxValue / segments) * i).c_str(), (int) px, (int) py, textSize, GREEN);
+        DrawText(std::to_string((maxValue / segments) * i).c_str(), (int) px, (int) py, textSize, color);
     }
     DrawCircle(xc, yc, radius - borderThickness - 8, BLACK);
-    DrawCircle(xc, yc, middleCircleRadius, GREEN);
+    DrawCircle(xc, yc, middleCircleRadius, color);
     double d = ((atof(value.c_str()) + offset) * PI / 180); // todo fix not on right value
     double px = xc + radius * cos(d);
     double py = yc + radius * sin(d);
-    DrawLine(xc, yc, (int) px, (int) py, GREEN); // todo fix
-    DrawText(units.c_str(), xc - MeasureText(units.c_str(), textSize) / 2, yc - 42, textSize, GREEN);
+    DrawLine(xc, yc, (int) px, (int) py, color); // todo fix
+    DrawText(units.c_str(), xc - MeasureText(units.c_str(), textSize) / 2, yc - 42, textSize, color);
 }
 
 void raygauge::Circle::draw() {
@@ -178,5 +180,5 @@ void raygauge::CircleWithExtraValue::draw() {
 void raygauge::CircleWithExtraValue::drawCircleWithExtraValue() {
     int cx = x + radius;
     int cy = y + radius;
-    DrawText(extraValue.c_str(), cx - MeasureText(extraValue.c_str(), textSize) / 2, cy + 42, textSize, GREEN);
+    DrawText(extraValue.c_str(), cx - MeasureText(extraValue.c_str(), textSize) / 2, cy + 42, textSize, color);
 }
