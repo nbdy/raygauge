@@ -11,6 +11,7 @@ addons:
       - gcc
       - cmake
       - build-essential
+      - xorg-dev
       - libglu1-mesa-dev
     sources:
       - ubuntu-toolchain-r-test
