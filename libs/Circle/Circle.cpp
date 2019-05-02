@@ -133,18 +133,18 @@ void raygauge::Circle::drawCircle() {
     for(int i = 0; i < segments; i+=2){
         int a = i * (degreesOfCircleUsage / segments);
         double d = ((a + offset) * PI / 180);
-        double px = xc + radius * cos(d);
-        double py = yc + radius * sin(d);
+        double px = xc + (radius + 8) * cos(d);
+        double py = yc + (radius + 8) * sin(d);
         DrawLine(xc, yc, (int) px, (int) py, color);
         double npx = px - xc;
         double npy = py - yc;
         if(npx >= 0 && npy >= 0) px += 8;
         if(npx <= 0 && npy <= 0) {
-            py -= 16;
+           py -= 16;
             px -= 20;
         }
         if(npx <= 0 && npy >= 0) px -= 16;
-        if(npx >= 0 && npy <= 0) py -= 16; // todo fix
+        if(npx >= 0 && npy <= 0) py -= 16;
         DrawText(std::to_string((maxValue / segments) * i).c_str(), (int) px, (int) py, textSize, color);
     }
     DrawCircle(xc, yc, radius - borderThickness - 8, BLACK);
