@@ -11,7 +11,7 @@ int main() {
     c->setY(50);
     c->setOffset(135);
     c->setMaxValue(260);
-    c->setSegments(13);
+    c->setSegments(10);
     c->setValue("200");
     c->setUnits("km/h");
     c->setColor(RED);
@@ -31,6 +31,7 @@ int main() {
         BeginDrawing();
         ClearBackground(BLACK);
         c->draw();
+        //r->draw();
         EndDrawing();
     }
     return 0;
